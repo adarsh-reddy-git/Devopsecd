@@ -1,6 +1,11 @@
-FROM python:3.8
-WORKDIR /app
-COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
+# Use the official Python image as the base image
+FROM python:3.9
+
+# Copy the Python script into the container
+COPY hello.py /app/
+
+# Set the working directory to /app/
+WORKDIR /app/
+
+# Run the Python script when the container starts
+CMD ["python", "hello.py"]
