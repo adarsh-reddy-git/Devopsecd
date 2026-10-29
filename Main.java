@@ -15,23 +15,24 @@ public class Main {
     }
 
     @Test
-    public void testIncrementButton() {
-        // Navigate to the local HTML file
-        driver.get("file:///path/to/program.html");
+    public void testHomePageLoads() {
+        driver.get("http://localhost:8080");
+        String title = driver.getTitle();
+        assert title.equals("My Containerized Application");
+    }
 
-        // Click the increment button
-        driver.findElement(By.id("increment-button")).click();
-
-        // Get the updated text content from the output element
-        String result = driver.findElement(By.id("output")).getText();
-
-        // Assert that the value has incremented to "1"
-        assert result.equals("1");
+    @Test
+    public void testSubmitForm() {
+        driver.get("http://localhost:8080");
+        driver.findElement(By.name("name")).sendKeys("John Doe");
+        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
+        driver.findElement(By.name("submit")).click();
+        String result = driver.findElement(By.id("result")).getText();
+        assert result.equals("Form submitted successfully!");
     }
 
     @After
     public void tearDown() {
-        // Close the browser session
         driver.quit();
     }
 }
