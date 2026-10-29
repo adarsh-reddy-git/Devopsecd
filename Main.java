@@ -1,38 +1,21 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class Main {
-    private WebDriver driver;
-
-    @Before
-    public void setUp() {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
         System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
-        driver = new ChromeDriver();
-    }
 
-    @Test
-    public void testHomePageLoads() {
-        driver.get("http://localhost:8080");
-        String title = driver.getTitle();
-        assert title.equals("My Containerized Application");
-    }
+        // Initialize Chrome WebDriver instance
+        WebDriver driver = new ChromeDriver();
 
-    @Test
-    public void testSubmitForm() {
-        driver.get("http://localhost:8080");
-        driver.findElement(By.name("name")).sendKeys("John Doe");
-        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
-        driver.findElement(By.name("submit")).click();
-        String result = driver.findElement(By.id("result")).getText();
-        assert result.equals("Form submitted successfully!");
-    }
+        // Navigate to the specified URL
+        driver.get("https://www.google.com");
 
-    @After
-    public void tearDown() {
+        // Print the page title to the console
+        System.out.println(driver.getTitle());
+
+        // Quit the browser session
         driver.quit();
     }
 }
